@@ -3,6 +3,7 @@ package api
 import (
 	"bytes"
 	"context"
+	"strings"
 
 	"connectrpc.com/connect"
 	"github.com/esolveeg/cms-api/proto_gen/devkit/v1"
@@ -24,6 +25,10 @@ func (api *Api) FilesList(ctx context.Context, req *connect.Request[devkitv1.Fil
 	return connect.NewResponse(response), err
 }
 func (api *Api) BucketCreateUpdate(ctx context.Context, req *connect.Request[devkitv1.BucketCreateUpdateRequest]) (*connect.Response[devkitv1.BucketCreateUpdateResponse], error) {
+	_, err := api.checkForAccess(req.Header(), "buckets", "create_update")
+	if err != nil {
+		return nil, err
+	}
 	if err := ctx.Err(); err != nil {
 		return nil, connect.NewError(connect.CodeInternal, err)
 	}
@@ -65,8 +70,16 @@ func (api *Api) ImportTable(ctx context.Context, req *connect.Request[devkitv1.I
 	if err := ctx.Err(); err != nil {
 		return nil, connect.NewError(connect.CodeInternal, err)
 	}
+	permissionName := strings.Replace(req.Msg.SchemaName, "_schema", "", 1)
+	_, err := api.checkForAccess(req.Header(), permissionName, "create")
+	if err != nil {
+		_, err := api.checkForAccess(req.Header(), permissionName, "create_update")
+		if err != nil {
+			return nil, err
+		}
+	}
 	buffer := bytes.NewBuffer(req.Msg.Reader)
-	_, err := api.sqlSeeder.SeedFromExcel(*buffer, req.Msg.SchemaName, req.Msg.TableName, req.Msg.SchemaName)
+	_, err = api.sqlSeeder.SeedFromExcel(*buffer, req.Msg.SchemaName, req.Msg.TableName, req.Msg.SchemaName)
 	if err != nil {
 		return nil, err
 	}

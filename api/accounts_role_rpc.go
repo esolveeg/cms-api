@@ -8,11 +8,16 @@ import (
 )
 
 func (api *Api) RolesList(ctx context.Context, req *connect.Request[apiv1.RolesListRequest]) (*connect.Response[apiv1.RolesListResponse], error) {
+	permissionGroupName := "roles"
+	permissionsMap, err := api.checkForAccess(req.Header(), permissionGroupName, "list")
+	if err != nil {
+		return nil, err
+	}
 	response, err := api.accountsUsecase.RolesList(ctx)
 	if err != nil {
 		return nil, err
 	}
-	options, err := api.getAccessableActionsForGroup(ctx, req.Header(), "roles")
+	options, err := api.getAccessableActionsForGroup(*permissionsMap, permissionGroupName)
 	if err != nil {
 		return nil, err
 	}
@@ -28,6 +33,10 @@ func (api *Api) RoleCreateUpdate(ctx context.Context, req *connect.Request[apiv1
 	if req.Msg.GetRoleId() == 0 && req.Msg.GetRoleName() == "" {
 		return nil, connect.NewError(connect.CodeInvalidArgument, fmt.Errorf("role name is required if role ID not passed (create scenario)"))
 	}
+	_, err = api.checkForAccess(req.Header(), "roles", "create_update")
+	if err != nil {
+		return nil, err
+	}
 	response, err := api.accountsUsecase.RoleCreateUpdate(ctx, req.Msg)
 	if err != nil {
 		return nil, err
@@ -36,7 +45,11 @@ func (api *Api) RoleCreateUpdate(ctx context.Context, req *connect.Request[apiv1
 }
 
 func (api *Api) RolesDeleteRestore(ctx context.Context, req *connect.Request[apiv1.RolesDeleteRestoreRequest]) (*connect.Response[apiv1.RolesDeleteRestoreResponse], error) {
-	_, err := api.accountsUsecase.RolesDeleteRestore(ctx, req.Msg)
+	_, err := api.checkForAccess(req.Header(), "roles", "delete_restore")
+	if err != nil {
+		return nil, err
+	}
+	_, err = api.accountsUsecase.RolesDeleteRestore(ctx, req.Msg)
 	if err != nil {
 		return nil, err
 	}

@@ -9,18 +9,9 @@ import (
 )
 
 func (api *Api) UsersList(ctx context.Context, req *connect.Request[devkitv1.UsersListRequest]) (*connect.Response[devkitv1.UsersListResponse], error) {
-	userPayload, err := api.authorizeRequestHeader(ctx, req.Header())
+	_, err := api.checkForAccess(req.Header(), "users", "list")
 	if err != nil {
-		return nil, connect.NewError(connect.CodeUnauthenticated, fmt.Errorf("invalid access token: %w", err))
-	}
-
-	permissionMap, err := api.authorizedUserPermissions(ctx, userPayload)
-	if err != nil {
-		return nil, fmt.Errorf("failed to get user permissions: %w", err)
-	}
-
-	if _, ok := permissionMap["users"]; !ok {
-		return nil, connect.NewError(connect.CodePermissionDenied, fmt.Errorf("user does not have the required permissions"))
+		return nil, err
 	}
 
 	response, err := api.accountsUsecase.UsersList(ctx)
@@ -35,54 +26,50 @@ func (api *Api) UserCreateUpdate(ctx context.Context, req *connect.Request[devki
 	if err != nil {
 		return nil, connect.NewError(connect.CodeInvalidArgument, fmt.Errorf("validation error: %w", err))
 	}
-
 	if req.Msg.GetUserId() == 0 && (req.Msg.GetUserName() == "" || req.Msg.GetUserEmail() == "" || req.Msg.GetUserPhone() == "") {
 		return nil, connect.NewError(connect.CodeInvalidArgument, fmt.Errorf("user ID is missing; name, email, and phone are required for creating a new user"))
 	}
-
+	_, err = api.checkForAccess(req.Header(), "users", "create_update")
+	if err != nil {
+		return nil, err
+	}
 	response, err := api.accountsUsecase.UserCreateUpdate(ctx, req.Msg)
-	if err != nil {
-		return nil, fmt.Errorf("failed to create or update user: %w", err)
-	}
-	return connect.NewResponse(response), nil
-}
-func (api *Api) UserLogin(ctx context.Context, req *connect.Request[devkitv1.UserLoginRequest]) (*connect.Response[devkitv1.UserLoginResponse], error) {
-	err := api.validator.Validate(req.Msg)
-	if err != nil {
-		return nil, connect.NewError(connect.CodeInvalidArgument, err)
-	}
-	response, err := api.accountsUsecase.UserLogin(ctx, req.Msg)
 	if err != nil {
 		return nil, err
 	}
 	return connect.NewResponse(response), nil
 }
-func (api *Api) UserResetPassword(ctx context.Context, req *connect.Request[devkitv1.UserResetPasswordRequest]) (*connect.Response[devkitv1.UserResetPasswordResponse], error) {
-	err := api.validator.Validate(req.Msg)
+
+func (api *Api) UsersDeleteRestore(ctx context.Context, req *connect.Request[devkitv1.UsersDeleteRestoreRequest]) (*connect.Response[devkitv1.UsersDeleteRestoreResponse], error) {
+	_, err := api.checkForAccess(req.Header(), "users", "delete_restore")
 	if err != nil {
-		return nil, connect.NewError(connect.CodeInvalidArgument, fmt.Errorf("validation error: %w", err))
+		return nil, err
 	}
-	if req.Msg.NewPassword != req.Msg.NewPasswordConfirmation {
-		return nil, connect.NewError(connect.CodeInvalidArgument, fmt.Errorf("password and confirmation do not match"))
-	}
-	response, err := api.accountsUsecase.UserResetPassword(ctx, req.Msg)
+	_, err = api.accountsUsecase.UsersDeleteRestore(ctx, req.Msg)
 	if err != nil {
-		return nil, fmt.Errorf("failed to reset password: %w", err)
+		return nil, err
 	}
-	return connect.NewResponse(response), nil
+	return connect.NewResponse(&devkitv1.UsersDeleteRestoreResponse{}), nil
 }
 
-func (api *Api) UserAuthorize(ctx context.Context, req *connect.Request[devkitv1.UserAuthorizeRequest]) (*connect.Response[devkitv1.UserAuthorizeResponse], error) {
-	payload, err := api.authorizeRequestHeader(ctx, req.Header())
-	if err != nil {
-		return nil, connect.NewError(connect.CodeUnauthenticated, fmt.Errorf("invalid access token: %w", err))
+func (api *Api) UserDelete(ctx context.Context, req *connect.Request[devkitv1.UserDeleteRequest]) (*connect.Response[devkitv1.UserDeleteResponse], error) {
+	_, err := api.checkForAccess(req.Header(), "users", "delete")
+	if req.Msg.RecordId != 0 {
+		_, err := api.checkForAccess(req.Header(), "users", "delete_restore")
+		if err != nil {
+			return nil, err
+		}
 	}
-	response, _, err := api.accountsUsecase.AppLogin(ctx, payload.Username)
-	if err != nil {
-		return nil, fmt.Errorf("failed to authorize user: %w", err)
+	if req.Msg.RecordId == 0 {
+		payload, err := api.authorizeRequestHeader(req.Header())
+		if err != nil {
+			return nil, err
+		}
+		req.Msg.RecordId = payload.UserId
 	}
-	return connect.NewResponse(&devkitv1.UserAuthorizeResponse{
-		User:          response.User,
-		NavigationBar: response.NavigationBar,
-	}), nil
+	_, err = api.accountsUsecase.UserDelete(ctx, req.Msg.RecordId)
+	if err != nil {
+		return nil, err
+	}
+	return connect.NewResponse(&devkitv1.UserDeleteResponse{}), nil
 }

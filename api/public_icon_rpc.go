@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"connectrpc.com/connect"
-	devkitv1 "github.com/darwishdev/devkit-api/proto_gen/devkit/v1"
+	devkitv1 "github.com/esolveeg/cms-api/proto_gen/devkit/v1"
 )
 
 func (api *Api) IconsCreateUpdateBulk(ctx context.Context, req *connect.Request[devkitv1.IconsCreateUpdateBulkRequest]) (*connect.Response[devkitv1.IconsCreateUpdateBulkResponse], error) {

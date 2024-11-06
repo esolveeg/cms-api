@@ -2,7 +2,7 @@ package usecase
 
 import (
 	"context"
-	devkitv1 "github.com/darwishdev/devkit-api/proto_gen/devkit/v1"
+	devkitv1 "github.com/esolveeg/cms-api/proto_gen/devkit/v1"
 )
 
 func (s *PublicUsecase) SettingsUpdate(ctx context.Context, req *devkitv1.SettingsUpdateRequest) error {

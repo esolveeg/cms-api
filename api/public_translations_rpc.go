@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"connectrpc.com/connect"
-	"github.com/darwishdev/devkit-api/proto_gen/devkit/v1"
+	"github.com/esolveeg/cms-api/proto_gen/devkit/v1"
 )
 
 func (api *Api) TranslationsDelete(ctx context.Context, req *connect.Request[devkitv1.TranslationsDeleteRequest]) (*connect.Response[devkitv1.TranslationsDeleteResponse], error) {

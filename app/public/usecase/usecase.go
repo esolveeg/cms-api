@@ -3,12 +3,12 @@ package usecase
 import (
 	"context"
 
-	"github.com/darwishdev/devkit-api/app/public/adapter"
-	"github.com/darwishdev/devkit-api/app/public/repo"
-	"github.com/darwishdev/devkit-api/db"
-	"github.com/darwishdev/devkit-api/pkg/redisclient"
-	"github.com/darwishdev/devkit-api/pkg/resend"
-	devkitv1 "github.com/darwishdev/devkit-api/proto_gen/devkit/v1"
+	"github.com/esolveeg/cms-api/app/public/adapter"
+	"github.com/esolveeg/cms-api/app/public/repo"
+	"github.com/esolveeg/cms-api/db"
+	"github.com/esolveeg/cms-api/pkg/redisclient"
+	"github.com/esolveeg/cms-api/pkg/resend"
+	devkitv1 "github.com/esolveeg/cms-api/proto_gen/devkit/v1"
 	supaapigo "github.com/darwishdev/supaapi-go"
 )
 

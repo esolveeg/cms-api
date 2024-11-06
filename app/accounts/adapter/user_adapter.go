@@ -3,8 +3,8 @@ package adapter
 import (
 	"encoding/json"
 
-	"github.com/darwishdev/devkit-api/db"
-	devkitv1 "github.com/darwishdev/devkit-api/proto_gen/devkit/v1"
+	"github.com/esolveeg/cms-api/db"
+	devkitv1 "github.com/esolveeg/cms-api/proto_gen/devkit/v1"
 	"github.com/jackc/pgx/v5/pgtype"
 	"golang.org/x/crypto/bcrypt"
 )

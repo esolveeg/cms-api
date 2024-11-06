@@ -1,4 +1,4 @@
-module github.com/darwishdev/devkit-api
+module github.com/esolveeg/cms-api
 
 go 1.23.2
 

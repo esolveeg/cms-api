@@ -2,17 +2,19 @@ package api
 
 import (
 	// USECASE_IMPORTS
+	companiesUsecase "github.com/esolveeg/cms-api/app/companies/usecase"
+
 	"github.com/bufbuild/protovalidate-go"
-	accountsUsecase "github.com/darwishdev/devkit-api/app/accounts/usecase"
-	publicUsecase "github.com/darwishdev/devkit-api/app/public/usecase"
-	"github.com/darwishdev/devkit-api/config"
-	"github.com/darwishdev/devkit-api/db"
-	"github.com/darwishdev/devkit-api/pkg/auth"
-	"github.com/darwishdev/devkit-api/pkg/redisclient"
-	"github.com/darwishdev/devkit-api/pkg/resend"
-	"github.com/darwishdev/devkit-api/proto_gen/devkit/v1/devkitv1connect"
 	"github.com/darwishdev/sqlseeder"
 	supaapigo "github.com/darwishdev/supaapi-go"
+	accountsUsecase "github.com/esolveeg/cms-api/app/accounts/usecase"
+	publicUsecase "github.com/esolveeg/cms-api/app/public/usecase"
+	"github.com/esolveeg/cms-api/config"
+	"github.com/esolveeg/cms-api/db"
+	"github.com/esolveeg/cms-api/pkg/auth"
+	"github.com/esolveeg/cms-api/pkg/redisclient"
+	"github.com/esolveeg/cms-api/pkg/resend"
+	"github.com/esolveeg/cms-api/proto_gen/devkit/v1/devkitv1connect"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -25,6 +27,8 @@ type Api struct {
 	sqlSeeder       sqlseeder.SeederInterface
 	publicUsecase   publicUsecase.PublicUsecaseInterface
 	// USECASE_FIELDS
+	companiesUsecase companiesUsecase.CompaniesUsecaseInterface
+
 	supaapi     supaapigo.Supaapi
 	redisClient redisclient.RedisClientInterface
 	store       db.Store
@@ -55,10 +59,13 @@ func NewApi(config config.Config, store db.Store) (devkitv1connect.DevkitService
 	sqlSeeder := sqlseeder.NewSeeder(sqlseeder.SeederConfig{HashFunc: HashFunc})
 	redisClient := redisclient.NewRedisClient(config.RedisHost, config.RedisPort, config.RedisPassword, config.RedisDatabase)
 	// USECASE_INSTANTIATIONS
+	companiesUsecase := companiesUsecase.NewCompaniesUsecase(store)
 	accountsUsecase := accountsUsecase.NewAccountsUsecase(store, supaapi, redisClient, tokenMaker, config.AccessTokenDuration)
 	publicUsecase := publicUsecase.NewPublicUsecase(store, supaapi, redisClient, resendClient)
 	return &Api{
 		// USECASE_INJECTIONS
+		companiesUsecase: companiesUsecase,
+
 		accountsUsecase: accountsUsecase,
 		store:           store,
 		redisClient:     redisClient,

@@ -5,10 +5,10 @@ import (
 	"testing"
 
 	"connectrpc.com/connect"
-	"github.com/darwishdev/devkit-api/db"
-	mockdb "github.com/darwishdev/devkit-api/db/mock"
-	"github.com/darwishdev/devkit-api/pkg/random"
-	"github.com/darwishdev/devkit-api/proto_gen/devkit/v1"
+	"github.com/esolveeg/cms-api/db"
+	mockdb "github.com/esolveeg/cms-api/db/mock"
+	"github.com/esolveeg/cms-api/pkg/random"
+	"github.com/esolveeg/cms-api/proto_gen/devkit/v1"
 	"github.com/golang/mock/gomock"
 )
 

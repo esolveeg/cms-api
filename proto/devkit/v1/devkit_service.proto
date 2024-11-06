@@ -1,6 +1,7 @@
 syntax = "proto3";
 
 // INJECT IMPORTS
+import "devkit/v1/companies_companies.proto";
 
 import "devkit/v1/accounts_user.proto";
 import "devkit/v1/accounts_auth.proto";
@@ -13,73 +14,79 @@ import "devkit/v1/accounts_role.proto";
 
 package devkit.v1;
 service DevkitService {
-	// INJECT METHODS
+// INJECT METHODS
+rpc CompaniesList(CompaniesListRequest) returns (CompaniesListResponse) {  option idempotency_level = NO_SIDE_EFFECTS;}
+
+
+rpc CompaniesCreateUpdate(CompaniesCreateUpdateRequest) returns (CompaniesCreateUpdateResponse)  {  }
+
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // public 
 //////////////////////////////////////////////////////////////////////////////////////////////
-    // settings
-    rpc SettingsUpdate(SettingsUpdateRequest) returns (SettingsUpdateResponse) {}
-    rpc SettingsFindForUpdate(SettingsFindForUpdateRequest) returns (SettingsFindForUpdateResponse)  {
-        option idempotency_level = NO_SIDE_EFFECTS;
+// settings
+rpc SettingsUpdate(SettingsUpdateRequest) returns (SettingsUpdateResponse) {}
+rpc SettingsFindForUpdate(SettingsFindForUpdateRequest) returns (SettingsFindForUpdateResponse)  {
+option idempotency_level = NO_SIDE_EFFECTS;
     }
 
-    // icons
-    rpc IconsList(IconsListRequest) returns (IconsListResponse)  {
-        option idempotency_level = NO_SIDE_EFFECTS;
+// icons
+rpc IconsList(IconsListRequest) returns (IconsListResponse)  {
+option idempotency_level = NO_SIDE_EFFECTS;
     }
-    rpc IconsCreateUpdateBulk(IconsCreateUpdateBulkRequest) returns (IconsCreateUpdateBulkResponse)  {
-        option idempotency_level = NO_SIDE_EFFECTS;
+rpc IconsCreateUpdateBulk(IconsCreateUpdateBulkRequest) returns (IconsCreateUpdateBulkResponse)  {
+option idempotency_level = NO_SIDE_EFFECTS;
     }    // storage
-    rpc BucketCreateUpdate(BucketCreateUpdateRequest) returns (BucketCreateUpdateResponse) {}
-    rpc FilesList(FilesListRequest) returns (FilesListResponse) {
-        option idempotency_level = NO_SIDE_EFFECTS;
+rpc BucketCreateUpdate(BucketCreateUpdateRequest) returns (BucketCreateUpdateResponse) {}
+rpc FilesList(FilesListRequest) returns (FilesListResponse) {
+option idempotency_level = NO_SIDE_EFFECTS;
     }
-    rpc BucketsList(BucketsListRequest) returns (BucketsListResponse)  {
-        option idempotency_level = NO_SIDE_EFFECTS;
+rpc BucketsList(BucketsListRequest) returns (BucketsListResponse)  {
+option idempotency_level = NO_SIDE_EFFECTS;
     }
-    rpc UploadFile(UploadFileRequest) returns (UploadFileResponse) {}
-    rpc UploadFiles(UploadFilesRequest) returns (UploadFilesResponse) {}
-    rpc FilesDelete(FilesDeleteRequest) returns (FilesDeleteResponse) {}
-    rpc ImportTable(ImportTableRequest) returns (ImportTableResponse) {}
-    // emails
-    rpc SendEmail(SendEmailRequest) returns (SendEmailResponse) {}
-    // translations
-    rpc TranslationsCreateUpdateBulk(TranslationsCreateUpdateBulkRequest) returns (TranslationsCreateUpdateBulkResponse) {}
-    rpc TranslationsDelete(TranslationsDeleteRequest) returns (TranslationsDeleteResponse) {}
-    rpc TranslationsList(TranslationsListRequest) returns (TranslationsListResponse)  {
-        option idempotency_level = NO_SIDE_EFFECTS;
+rpc UploadFile(UploadFileRequest) returns (UploadFileResponse) {}
+rpc UploadFiles(UploadFilesRequest) returns (UploadFilesResponse) {}
+rpc FilesDelete(FilesDeleteRequest) returns (FilesDeleteResponse) {}
+rpc ImportTable(ImportTableRequest) returns (ImportTableResponse) {}
+// emails
+rpc SendEmail(SendEmailRequest) returns (SendEmailResponse) {}
+// translations
+rpc TranslationsCreateUpdateBulk(TranslationsCreateUpdateBulkRequest) returns (TranslationsCreateUpdateBulkResponse) {}
+rpc TranslationsDelete(TranslationsDeleteRequest) returns (TranslationsDeleteResponse) {}
+rpc TranslationsList(TranslationsListRequest) returns (TranslationsListResponse)  {
+option idempotency_level = NO_SIDE_EFFECTS;
     }
 //////////////////////////////////////////////////////////////////////////////////////////////
 // accounts
 //////////////////////////////////////////////////////////////////////////////////////////////
-    // roles
+// roles
 //*******************************************************************************************//
-    rpc RolesList(RolesListRequest) returns (RolesListResponse) {
-        option idempotency_level = NO_SIDE_EFFECTS;
+rpc RolesList(RolesListRequest) returns (RolesListResponse) {
+option idempotency_level = NO_SIDE_EFFECTS;
     }
-    rpc RoleCreateUpdate(RoleCreateUpdateRequest) returns (RoleCreateUpdateResponse) {}
-    rpc RolesDeleteRestore(RolesDeleteRestoreRequest) returns (RolesDeleteRestoreResponse) {}
+rpc RoleCreateUpdate(RoleCreateUpdateRequest) returns (RoleCreateUpdateResponse) {}
+rpc RolesDeleteRestore(RolesDeleteRestoreRequest) returns (RolesDeleteRestoreResponse) {}
 //*******************************************************************************************//
-    // users
+// users
 //*******************************************************************************************//
-    rpc UsersList(UsersListRequest) returns (UsersListResponse)  {
-        option idempotency_level = NO_SIDE_EFFECTS;
+rpc UsersList(UsersListRequest) returns (UsersListResponse)  {
+option idempotency_level = NO_SIDE_EFFECTS;
     }
-    rpc UserCreateUpdate(UserCreateUpdateRequest) returns (UserCreateUpdateResponse) {}
-    rpc UserDelete(UserDeleteRequest) returns (UserDeleteResponse) {}
-    rpc UsersDeleteRestore(UsersDeleteRestoreRequest) returns (UsersDeleteRestoreResponse) {}
+rpc UserCreateUpdate(UserCreateUpdateRequest) returns (UserCreateUpdateResponse) {}
+rpc UserDelete(UserDeleteRequest) returns (UserDeleteResponse) {}
+rpc UsersDeleteRestore(UsersDeleteRestoreRequest) returns (UsersDeleteRestoreResponse) {}
 //*******************************************************************************************//
-    // auth
+// auth
 //*******************************************************************************************//
-    rpc UserLoginProviderCallback(UserLoginProviderCallbackRequest) returns (UserLoginProviderCallbackResponse) {
-        option idempotency_level = NO_SIDE_EFFECTS;
+rpc UserLoginProviderCallback(UserLoginProviderCallbackRequest) returns (UserLoginProviderCallbackResponse) {
+option idempotency_level = NO_SIDE_EFFECTS;
     }
-    rpc UserResetPassword(UserResetPasswordRequest) returns (UserResetPasswordResponse) {}
-    rpc UserResetPasswordEmail(UserResetPasswordEmailRequest) returns (UserResetPasswordEmailResponse) {}
-    rpc UserLoginProvider(UserLoginProviderRequest) returns (UserLoginProviderResponse) {}
-    rpc UserInvite(UserInviteRequest) returns (UserInviteResponse) {}
-    rpc UserAuthorize(UserAuthorizeRequest) returns (UserAuthorizeResponse) {}
-    rpc UserLogin(UserLoginRequest) returns (UserLoginResponse) {}
+rpc UserResetPassword(UserResetPasswordRequest) returns (UserResetPasswordResponse) {}
+rpc UserResetPasswordEmail(UserResetPasswordEmailRequest) returns (UserResetPasswordEmailResponse) {}
+rpc UserLoginProvider(UserLoginProviderRequest) returns (UserLoginProviderResponse) {}
+rpc UserInvite(UserInviteRequest) returns (UserInviteResponse) {}
+rpc UserAuthorize(UserAuthorizeRequest) returns (UserAuthorizeResponse) {}
+rpc UserLogin(UserLoginRequest) returns (UserLoginResponse) {}
 
 }

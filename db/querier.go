@@ -9,6 +9,8 @@ import (
 )
 
 type Querier interface {
+	CompaniesCreateUpdate(ctx context.Context, arg CompaniesCreateUpdateParams) (CompaniesSchemaCompany, error)
+	CompaniesList(ctx context.Context) ([]CompaniesSchemaCompany, error)
 	IconsCreateUpdateBulk(ctx context.Context, arg IconsCreateUpdateBulkParams) ([]Icon, error)
 	IconsInputList(ctx context.Context) ([]Icon, error)
 	RoleCreateUpdate(ctx context.Context, arg RoleCreateUpdateParams) (AccountsSchemaRole, error)

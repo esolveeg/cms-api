@@ -3,9 +3,9 @@ package usecase
 import (
 	"context"
 
-	"github.com/darwishdev/devkit-api/db"
-	"github.com/darwishdev/devkit-api/pkg/redisclient"
-	devkitv1 "github.com/darwishdev/devkit-api/proto_gen/devkit/v1"
+	"github.com/esolveeg/cms-api/db"
+	"github.com/esolveeg/cms-api/pkg/redisclient"
+	devkitv1 "github.com/esolveeg/cms-api/proto_gen/devkit/v1"
 	"github.com/rs/zerolog/log"
 	"github.com/supabase-community/auth-go/types"
 )

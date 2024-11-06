@@ -22,6 +22,9 @@ const (
 // }
 
 func (store *SQLStore) DbErrorParser(err error, errorHandler map[string]string) *connect.Error {
+	if err == nil {
+		return nil
+	}
 	var pgErr *pgconn.PgError
 	if err.Error() == "no rows in result set" {
 		return connect.NewError(connect.CodeInvalidArgument, fmt.Errorf("no_data_found"))

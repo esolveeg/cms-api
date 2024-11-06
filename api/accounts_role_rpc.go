@@ -4,7 +4,7 @@ import (
 	"connectrpc.com/connect"
 	"context"
 	"fmt"
-	apiv1 "github.com/darwishdev/devkit-api/proto_gen/devkit/v1"
+	apiv1 "github.com/esolveeg/cms-api/proto_gen/devkit/v1"
 )
 
 func (api *Api) RolesList(ctx context.Context, req *connect.Request[apiv1.RolesListRequest]) (*connect.Response[apiv1.RolesListResponse], error) {

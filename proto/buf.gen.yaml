@@ -2,7 +2,7 @@ version: v1
 managed:
   enabled: true 
   go_package_prefix:
-    default: github.com/darwishdev/devkit-api/proto_gen
+    default: github.com/esolveeg/cms-api/proto_gen
     except:
       - buf.build/bufbuild/protovalidate
 

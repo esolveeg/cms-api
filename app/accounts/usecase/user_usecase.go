@@ -2,7 +2,7 @@ package usecase
 
 import (
 	"context"
-	apiv1 "github.com/darwishdev/devkit-api/proto_gen/devkit/v1"
+	apiv1 "github.com/esolveeg/cms-api/proto_gen/devkit/v1"
 	"github.com/google/uuid"
 	"github.com/supabase-community/auth-go/types"
 )

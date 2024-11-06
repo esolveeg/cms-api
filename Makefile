@@ -24,9 +24,14 @@ testapi:
 	go test ./api/... -v --race
 
 
-			
+seed_storage:
+	devkit seed storage -f ../cms-storage-seed/assets -i ../cms-storage-seed/icons
+
+seed_accounts:
+	devkit seed accounts_schema --file-path ../accounts.xlsx -e
+
 rdb:
-	supabase db reset && devkit seed storage -f ../storage_seed/assets -i ../storage_seed/icons && devkit seed accounts_schema --file-path ../accounts.xlsx -e
+	supabase db reset && make seed_storage && devkit seed accounts_schema --file-path ../accounts.xlsx -e
 run:
 	go run main.go
 buf:
@@ -37,7 +42,7 @@ gen:
 	buf generate && sqlc generate
 
 mock:
-	mockgen -package mockdb -destination db/mock/store.go github.com/darwishdev/devkit-api/db Store
+	mockgen -package mockdb -destination db/mock/store.go github.com/esolveeg/cms-api/db Store
 test:
 	make mock && go test ./... -v --cover
 

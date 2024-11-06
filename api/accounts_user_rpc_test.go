@@ -6,8 +6,8 @@ import (
 	"testing"
 
 	"connectrpc.com/connect"
-	"github.com/darwishdev/devkit-api/pkg/random"
-	"github.com/darwishdev/devkit-api/proto_gen/devkit/v1"
+	"github.com/esolveeg/cms-api/pkg/random"
+	"github.com/esolveeg/cms-api/proto_gen/devkit/v1"
 	"github.com/stretchr/testify/require"
 )
 

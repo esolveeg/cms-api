@@ -1,7 +1,7 @@
 package adapter
 
 import (
-	devkitv1 "github.com/darwishdev/devkit-api/proto_gen/devkit/v1"
+	devkitv1 "github.com/esolveeg/cms-api/proto_gen/devkit/v1"
 	storage_go "github.com/supabase-community/storage-go"
 )
 

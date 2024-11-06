@@ -2,7 +2,7 @@ package usecase
 
 import (
 	"context"
-	apiv1 "github.com/darwishdev/devkit-api/proto_gen/devkit/v1"
+	apiv1 "github.com/esolveeg/cms-api/proto_gen/devkit/v1"
 )
 
 func (u *AccountsUsecase) RolesDeleteRestore(ctx context.Context, req *apiv1.RolesDeleteRestoreRequest) (*apiv1.RolesDeleteRestoreResponse, error) {

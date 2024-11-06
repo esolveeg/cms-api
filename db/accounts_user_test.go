@@ -4,7 +4,7 @@ import (
 	"context"
 	"testing"
 
-	"github.com/darwishdev/devkit-api/pkg/random"
+	"github.com/esolveeg/cms-api/pkg/random"
 	"github.com/stretchr/testify/require"
 )
 

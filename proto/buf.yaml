@@ -1,5 +1,5 @@
 version: v1
-name: buf.build/ahmeddarwish/devkit-api
+name: buf.build/ahmeddarwish/cms-api
 
 deps:
   - buf.build/bufbuild/protovalidate

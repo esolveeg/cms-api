@@ -64,6 +64,25 @@ type AccountsSchemaUserType struct {
 	UserTypeName string `json:"user_type_name"`
 }
 
+type CompaniesSchemaCompany struct {
+	CompanyID               int32            `json:"company_id"`
+	CompanyName             string           `json:"company_name"`
+	CompanyNameAr           pgtype.Text      `json:"company_name_ar"`
+	CompanyPhone            pgtype.Text      `json:"company_phone"`
+	CompanyAddress          pgtype.Text      `json:"company_address"`
+	CompanyAddressAr        pgtype.Text      `json:"company_address_ar"`
+	CompanyDescription      pgtype.Text      `json:"company_description"`
+	CompanyDescriptionAr    pgtype.Text      `json:"company_description_ar"`
+	CompanyEmail            pgtype.Text      `json:"company_email"`
+	CompanyLogo             pgtype.Text      `json:"company_logo"`
+	CompanyLogoVertical     pgtype.Text      `json:"company_logo_vertical"`
+	CompanyLogoDark         pgtype.Text      `json:"company_logo_dark"`
+	CompanyLogoDarkVertical pgtype.Text      `json:"company_logo_dark_vertical"`
+	CreatedAt               pgtype.Timestamp `json:"created_at"`
+	UpdatedAt               pgtype.Timestamp `json:"updated_at"`
+	DeletedAt               pgtype.Timestamp `json:"deleted_at"`
+}
+
 type Icon struct {
 	IconID      int32  `json:"icon_id"`
 	IconName    string `json:"icon_name"`

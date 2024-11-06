@@ -5,7 +5,7 @@ import (
 	"fmt"
 
 	"connectrpc.com/connect"
-	devkitv1 "github.com/darwishdev/devkit-api/proto_gen/devkit/v1"
+	devkitv1 "github.com/esolveeg/cms-api/proto_gen/devkit/v1"
 )
 
 func (api *Api) UsersList(ctx context.Context, req *connect.Request[devkitv1.UsersListRequest]) (*connect.Response[devkitv1.UsersListResponse], error) {

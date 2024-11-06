@@ -7,7 +7,7 @@ import (
 	"testing"
 
 	"connectrpc.com/connect"
-	devkitv1 "github.com/darwishdev/devkit-api/proto_gen/devkit/v1"
+	devkitv1 "github.com/esolveeg/cms-api/proto_gen/devkit/v1"
 )
 
 var testBucket string = "test_bucket"

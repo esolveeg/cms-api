@@ -3,7 +3,7 @@ package repo
 import (
 	"context"
 
-	"github.com/darwishdev/devkit-api/db"
+	"github.com/esolveeg/cms-api/db"
 )
 
 func (repo *PublicRepo) IconsCreateUpdateBulk(ctx context.Context, req db.IconsCreateUpdateBulkParams) (*[]db.Icon, error) {

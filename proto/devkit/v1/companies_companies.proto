@@ -1,0 +1,84 @@
+syntax = "proto3";
+import "devkit/v1/client.proto";
+import "buf/validate/validate.proto";
+import "google/protobuf/timestamp.proto";
+package devkit.v1;
+
+// message yourmessage {
+// }
+// INJECT MESSAGES  
+
+message CompaniesCreateUpdateRequest {
+  int32 company_id = 1; 
+
+  string company_name = 2 [
+  (buf.validate.field).string.min_len = 2,
+  (buf.validate.field).string.max_len = 200
+  ];  // Unique
+
+  string company_name_ar = 3 [
+  (buf.validate.field).string.max_len = 200
+  ];
+
+  string company_phone = 4 [
+  (buf.validate.field).string.max_len = 200
+  ];  // Unique
+
+  string company_address = 5[
+  (buf.validate.field).string.max_len = 200
+  ];
+
+  string company_address_ar = 6[
+  (buf.validate.field).string.max_len = 200
+  ];
+
+  string company_description = 7 ;
+
+  string company_description_ar = 8 ;
+
+  string company_email = 9 [
+  (buf.validate.field).string.email = true,
+  (buf.validate.field).string.max_len = 200
+  ];  // Unique
+
+  string company_logo = 10;
+
+  string company_logo_vertical = 11;
+
+  string company_logo_dark = 12;
+
+  string company_logo_dark_vertical = 13;
+}
+
+message CompaniesSchemaCompany {
+  int32 company_id = 1;
+  string company_name = 2;
+  string company_name_ar = 3;
+  string company_phone = 4;
+  string company_address = 5;
+  string company_address_ar = 6;
+  string company_description = 7;
+  string company_description_ar = 8;
+  string company_email = 9;
+  string company_logo = 10;
+  string company_logo_vertical = 11;
+  string company_logo_dark = 12;
+  string company_logo_dark_vertical = 13;
+  google.protobuf.Timestamp created_at = 14;
+  google.protobuf.Timestamp updated_at = 15;
+  google.protobuf.Timestamp deleted_at = 16;
+}
+message CompaniesCreateUpdateResponse {
+  CompaniesSchemaCompany record = 1;
+}
+
+
+message CompaniesListRequest {
+}
+
+message CompaniesListResponse {
+  repeated CompaniesSchemaCompany records= 1;
+  repeated CompaniesSchemaCompany deleted_records = 2;
+  ListDataOptions options = 3;
+}
+

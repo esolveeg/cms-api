@@ -4,12 +4,12 @@ import (
 	"context"
 	"time"
 
-	"github.com/darwishdev/devkit-api/app/accounts/adapter"
-	"github.com/darwishdev/devkit-api/app/accounts/repo"
-	"github.com/darwishdev/devkit-api/db"
-	"github.com/darwishdev/devkit-api/pkg/auth"
-	"github.com/darwishdev/devkit-api/pkg/redisclient"
-	"github.com/darwishdev/devkit-api/proto_gen/devkit/v1"
+	"github.com/esolveeg/cms-api/app/accounts/adapter"
+	"github.com/esolveeg/cms-api/app/accounts/repo"
+	"github.com/esolveeg/cms-api/db"
+	"github.com/esolveeg/cms-api/pkg/auth"
+	"github.com/esolveeg/cms-api/pkg/redisclient"
+	"github.com/esolveeg/cms-api/proto_gen/devkit/v1"
 	supaapigo "github.com/darwishdev/supaapi-go"
 )
 

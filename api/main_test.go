@@ -5,9 +5,9 @@ import (
 	"os"
 	"testing"
 
-	"github.com/darwishdev/devkit-api/config"
-	"github.com/darwishdev/devkit-api/db"
-	"github.com/darwishdev/devkit-api/proto_gen/devkit/v1/devkitv1connect"
+	"github.com/esolveeg/cms-api/config"
+	"github.com/esolveeg/cms-api/db"
+	"github.com/esolveeg/cms-api/proto_gen/devkit/v1/devkitv1connect"
 	"github.com/rs/zerolog/log"
 )
 

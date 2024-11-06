@@ -11,9 +11,9 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/darwishdev/devkit-api/api"
-	"github.com/darwishdev/devkit-api/config"
-	"github.com/darwishdev/devkit-api/db"
+	"github.com/esolveeg/cms-api/api"
+	"github.com/esolveeg/cms-api/config"
+	"github.com/esolveeg/cms-api/db"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 )

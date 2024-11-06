@@ -4,6 +4,7 @@ import (
 	"time"
 
 	"github.com/jackc/pgx/v5/pgtype"
+	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func StringToPgtext(str string) pgtype.Text {
@@ -41,4 +42,13 @@ func ToPgInt(value int32) pgtype.Int4 {
 }
 func ToPgFloat(value float32) pgtype.Float4 {
 	return pgtype.Float4{Float32: value, Valid: true}
+}
+func TimeToTimestamp(time time.Time) *timestamppb.Timestamp {
+	return timestamppb.New(time)
+}
+func PgTimeToTimestamp(time pgtype.Timestamp) *timestamppb.Timestamp {
+	if time.Valid {
+		return timestamppb.New(time.Time)
+	}
+	return nil
 }

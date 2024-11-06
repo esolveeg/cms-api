@@ -3,7 +3,7 @@ package repo
 import (
 	"context"
 
-	"github.com/darwishdev/devkit-api/db"
+	"github.com/esolveeg/cms-api/db"
 )
 
 func (repo *AccountsRepo) UserFindNavigationBars(ctx context.Context, userId int32) ([]db.UserFindNavigationBarsRow, error) {

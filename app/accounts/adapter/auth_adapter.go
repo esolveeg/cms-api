@@ -3,8 +3,8 @@ package adapter
 import (
 	"strings"
 
-	"github.com/darwishdev/devkit-api/db"
-	devkitv1 "github.com/darwishdev/devkit-api/proto_gen/devkit/v1"
+	"github.com/esolveeg/cms-api/db"
+	devkitv1 "github.com/esolveeg/cms-api/proto_gen/devkit/v1"
 	"github.com/supabase-community/auth-go/types"
 )
 

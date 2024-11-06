@@ -3,7 +3,7 @@ package repo
 import (
 	"context"
 
-	"github.com/darwishdev/devkit-api/db"
+	"github.com/esolveeg/cms-api/db"
 )
 
 func (repo *PublicRepo) TranslationsList(ctx context.Context) ([]db.Translation, error) {
